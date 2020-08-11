@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Todo App</title>
+</head>
+<style>
+body{
+    background: aliceblue;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQLo1HM6eHWfPR5hK_2GjEHS58aG9bXkYC-Mg&usqp=CAU');
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    background-size: cover;
+}
+a:link, a:visited {
+  background-color: blueviolet;
+  color: white;
+  padding:5px 20px;
+  text-align: center;
+  font-size:10px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+</style>
+<body>
+    <h1 style="color: rebeccapurple;text-align: center;font-size: 50px">Todo List</h1>
+    <div style="color: purple;font-size:30px;">Add a new todo item: 
+        <form action="{{ url_for('add') }}" method="POST">
+            <input style="width: 20%;padding: 6px 12px;margin: 6px 0; display: inline-block;border: 1px solid lightpink;border-radius: 4px;box-sizing: border-box;background-color: honeydew;" type="text" name="todoitem">
+            <input style="background-color: lightseagreen; border: none;color: white; padding: 5px 20px; text-align: center; text-decoration: none;display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;" type="submit" value="Add Item">
+        </form>
+    </div>
+    <div>
+        <h2 style="font-size:30px;color:rebeccapurple;">Incomplete Items</h2>
+        <ul>
+            {% for todo in incomplete %}
+            <li style="font-size: 20pt;background: violet;padding: 5px;margin-left: 2px;margin-right: 1000px;">{{ todo.text }} <a href="{{ url_for('complete',id=todo.id) }}">Mark As Complete </a></li>
+            {% endfor %}
+        </ul>
+        <h2 style="font-size:30px;color:mediumvioletred">Completed Items</h2>
+        <ul>
+            {% for todo in complete %}
+            <li style="font-size: 20pt;background: #3399ff;padding: 5px;margin-left: 2px;margin-right: 1000px;">{{ todo.text }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
